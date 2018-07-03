@@ -4,7 +4,7 @@
 # GNU Radio Python Flow Graph
 # Title: fm_receptor
 # Author: Hugo Soares
-# Generated: Tue Jul  3 11:41:26 2018
+# Generated: Tue Jul  3 11:42:42 2018
 ##################################################
 
 if __name__ == '__main__':
@@ -33,7 +33,7 @@ import sys
 import time
 
 
-class top_block(gr.top_block, Qt.QWidget):
+class fm_receptor(gr.top_block, Qt.QWidget):
 
     def __init__(self):
         gr.top_block.__init__(self, "fm_receptor")
@@ -55,7 +55,7 @@ class top_block(gr.top_block, Qt.QWidget):
         self.top_grid_layout = Qt.QGridLayout()
         self.top_layout.addLayout(self.top_grid_layout)
 
-        self.settings = Qt.QSettings("GNU Radio", "top_block")
+        self.settings = Qt.QSettings("GNU Radio", "fm_receptor")
         self.restoreGeometry(self.settings.value("geometry").toByteArray())
 
         ##################################################
@@ -75,6 +75,18 @@ class top_block(gr.top_block, Qt.QWidget):
         self._rf_gain_range = Range(0, 50, 1, 30, 200)
         self._rf_gain_win = RangeWidget(self._rf_gain_range, self.set_rf_gain, "RF GAIN", "counter_slider", float)
         self.top_layout.addWidget(self._rf_gain_win)
+        self.janela = Qt.QTabWidget()
+        self.janela_widget_0 = Qt.QWidget()
+        self.janela_layout_0 = Qt.QBoxLayout(Qt.QBoxLayout.TopToBottom, self.janela_widget_0)
+        self.janela_grid_layout_0 = Qt.QGridLayout()
+        self.janela_layout_0.addLayout(self.janela_grid_layout_0)
+        self.janela.addTab(self.janela_widget_0, "R Channel")
+        self.janela_widget_1 = Qt.QWidget()
+        self.janela_layout_1 = Qt.QBoxLayout(Qt.QBoxLayout.TopToBottom, self.janela_widget_1)
+        self.janela_grid_layout_1 = Qt.QGridLayout()
+        self.janela_layout_1.addLayout(self.janela_grid_layout_1)
+        self.janela.addTab(self.janela_widget_1, "L Channel")
+        self.top_layout.addWidget(self.janela)
         self._fine_frequency_range = Range(-250000, 250000, 500, 0, 200)
         self._fine_frequency_win = RangeWidget(self._fine_frequency_range, self.set_fine_frequency, "Fine Frequency", "counter_slider", float)
         self.top_layout.addWidget(self._fine_frequency_win)
@@ -88,18 +100,6 @@ class top_block(gr.top_block, Qt.QWidget):
         self.uhd_usrp_source_0.set_samp_rate(samp_rate)
         self.uhd_usrp_source_0.set_center_freq(usrp_frequency + fine_frequency, 0)
         self.uhd_usrp_source_0.set_gain(rf_gain, 0)
-        self.qtgui_tab_widget_0 = Qt.QTabWidget()
-        self.qtgui_tab_widget_0_widget_0 = Qt.QWidget()
-        self.qtgui_tab_widget_0_layout_0 = Qt.QBoxLayout(Qt.QBoxLayout.TopToBottom, self.qtgui_tab_widget_0_widget_0)
-        self.qtgui_tab_widget_0_grid_layout_0 = Qt.QGridLayout()
-        self.qtgui_tab_widget_0_layout_0.addLayout(self.qtgui_tab_widget_0_grid_layout_0)
-        self.qtgui_tab_widget_0.addTab(self.qtgui_tab_widget_0_widget_0, "R Channel")
-        self.qtgui_tab_widget_0_widget_1 = Qt.QWidget()
-        self.qtgui_tab_widget_0_layout_1 = Qt.QBoxLayout(Qt.QBoxLayout.TopToBottom, self.qtgui_tab_widget_0_widget_1)
-        self.qtgui_tab_widget_0_grid_layout_1 = Qt.QGridLayout()
-        self.qtgui_tab_widget_0_layout_1.addLayout(self.qtgui_tab_widget_0_grid_layout_1)
-        self.qtgui_tab_widget_0.addTab(self.qtgui_tab_widget_0_widget_1, "L Channel")
-        self.top_layout.addWidget(self.qtgui_tab_widget_0)
         self.qtgui_freq_sink_x_1 = qtgui.freq_sink_f(
         	1024, #size
         	firdes.WIN_BLACKMAN_hARRIS, #wintype
@@ -198,7 +198,7 @@ class top_block(gr.top_block, Qt.QWidget):
         self.connect((self.uhd_usrp_source_0, 0), (self.low_pass_filter_0, 0))    
 
     def closeEvent(self, event):
-        self.settings = Qt.QSettings("GNU Radio", "top_block")
+        self.settings = Qt.QSettings("GNU Radio", "fm_receptor")
         self.settings.setValue("geometry", self.saveGeometry())
         event.accept()
 
@@ -216,9 +216,9 @@ class top_block(gr.top_block, Qt.QWidget):
     def set_samp_rate(self, samp_rate):
         self.samp_rate = samp_rate
         self.low_pass_filter_0.set_taps(firdes.low_pass(1, self.samp_rate, 115000, 30000, firdes.WIN_HANN, 6.76))
-        self.uhd_usrp_source_0.set_samp_rate(self.samp_rate)
-        self.qtgui_freq_sink_x_1.set_frequency_range(0, self.samp_rate)
         self.qtgui_freq_sink_x_0.set_frequency_range(98900000, self.samp_rate)
+        self.qtgui_freq_sink_x_1.set_frequency_range(0, self.samp_rate)
+        self.uhd_usrp_source_0.set_samp_rate(self.samp_rate)
 
     def get_rf_gain(self):
         return self.rf_gain
@@ -236,7 +236,7 @@ class top_block(gr.top_block, Qt.QWidget):
         self.uhd_usrp_source_0.set_center_freq(self.usrp_frequency + self.fine_frequency, 0)
 
 
-def main(top_block_cls=top_block, options=None):
+def main(top_block_cls=fm_receptor, options=None):
 
     from distutils.version import StrictVersion
     if StrictVersion(Qt.qVersion()) >= StrictVersion("4.5.0"):
