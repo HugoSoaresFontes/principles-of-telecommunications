@@ -4,7 +4,7 @@
 # GNU Radio Python Flow Graph
 # Title: Loopback QAM Modulation - Sound Signals
 # Author: Hugo Soares
-# Generated: Tue Jul  3 15:42:06 2018
+# Generated: Tue Jul  3 15:56:07 2018
 ##################################################
 
 if __name__ == '__main__':
@@ -215,11 +215,11 @@ class loopback_qam_sound_signals(gr.top_block, Qt.QWidget):
         if "float" == "float" or "float" == "msg_float":
           self.qtgui_freq_sink_x_0.set_plot_pos_half(not True)
         
-        labels = ["", "", "", "", "",
+        labels = ["QAM Signal", "", "", "", "",
                   "", "", "", "", ""]
         widths = [1, 1, 1, 1, 1,
                   1, 1, 1, 1, 1]
-        colors = ["green", "red", "green", "black", "cyan",
+        colors = ["magenta", "red", "green", "black", "cyan",
                   "magenta", "yellow", "dark red", "dark green", "dark blue"]
         alphas = [1.0, 1.0, 1.0, 1.0, 1.0,
                   1.0, 1.0, 1.0, 1.0, 1.0]

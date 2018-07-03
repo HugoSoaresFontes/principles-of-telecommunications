@@ -1486,11 +1486,11 @@
     </param>
     <param>
       <key>color1</key>
-      <value>"green"</value>
+      <value>"magenta"</value>
     </param>
     <param>
       <key>label1</key>
-      <value></value>
+      <value>QAM Signal</value>
     </param>
     <param>
       <key>width1</key>
