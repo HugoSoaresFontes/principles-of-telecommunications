@@ -2,9 +2,9 @@
 # -*- coding: utf-8 -*-
 ##################################################
 # GNU Radio Python Flow Graph
-# Title: Loopback QAM Modulation
+# Title: Loopback QAM Modulation - Sound Signals
 # Author: Hugo Soares
-# Generated: Tue Jul  3 15:30:02 2018
+# Generated: Tue Jul  3 15:42:06 2018
 ##################################################
 
 if __name__ == '__main__':
@@ -32,12 +32,12 @@ import sip
 import sys
 
 
-class loopback_qam(gr.top_block, Qt.QWidget):
+class loopback_qam_sound_signals(gr.top_block, Qt.QWidget):
 
     def __init__(self):
-        gr.top_block.__init__(self, "Loopback QAM Modulation")
+        gr.top_block.__init__(self, "Loopback QAM Modulation - Sound Signals")
         Qt.QWidget.__init__(self)
-        self.setWindowTitle("Loopback QAM Modulation")
+        self.setWindowTitle("Loopback QAM Modulation - Sound Signals")
         try:
             self.setWindowIcon(Qt.QIcon.fromTheme('gnuradio-grc'))
         except:
@@ -54,7 +54,7 @@ class loopback_qam(gr.top_block, Qt.QWidget):
         self.top_grid_layout = Qt.QGridLayout()
         self.top_layout.addLayout(self.top_grid_layout)
 
-        self.settings = Qt.QSettings("GNU Radio", "loopback_qam")
+        self.settings = Qt.QSettings("GNU Radio", "loopback_qam_sound_signals")
         self.restoreGeometry(self.settings.value("geometry").toByteArray())
 
         ##################################################
@@ -70,17 +70,17 @@ class loopback_qam(gr.top_block, Qt.QWidget):
         self.janela_layout_0 = Qt.QBoxLayout(Qt.QBoxLayout.TopToBottom, self.janela_widget_0)
         self.janela_grid_layout_0 = Qt.QGridLayout()
         self.janela_layout_0.addLayout(self.janela_grid_layout_0)
-        self.janela.addTab(self.janela_widget_0, "Original Signal")
+        self.janela.addTab(self.janela_widget_0, "Frequency")
         self.janela_widget_1 = Qt.QWidget()
         self.janela_layout_1 = Qt.QBoxLayout(Qt.QBoxLayout.TopToBottom, self.janela_widget_1)
         self.janela_grid_layout_1 = Qt.QGridLayout()
         self.janela_layout_1.addLayout(self.janela_grid_layout_1)
-        self.janela.addTab(self.janela_widget_1, "Demodulated Signal")
+        self.janela.addTab(self.janela_widget_1, "Time ")
         self.janela_widget_2 = Qt.QWidget()
         self.janela_layout_2 = Qt.QBoxLayout(Qt.QBoxLayout.TopToBottom, self.janela_widget_2)
         self.janela_grid_layout_2 = Qt.QGridLayout()
         self.janela_layout_2.addLayout(self.janela_grid_layout_2)
-        self.janela.addTab(self.janela_widget_2, "QAM Signal")
+        self.janela.addTab(self.janela_widget_2, "QAM Signal (Frequency)")
         self.top_layout.addWidget(self.janela)
         self.rational_resampler_xxx_1_0 = filter.rational_resampler_fff(
                 interpolation=441,
@@ -110,7 +110,7 @@ class loopback_qam(gr.top_block, Qt.QWidget):
         	1024, #size
         	samp_rate, #samp_rate
         	"Original Signal - Time", #name
-        	2 #number of inputs
+        	4 #number of inputs
         )
         self.qtgui_time_sink_x_0_0_0.set_update_time(0.10)
         self.qtgui_time_sink_x_0_0_0.set_y_axis(-2, 2)
@@ -126,20 +126,20 @@ class loopback_qam(gr.top_block, Qt.QWidget):
         if not True:
           self.qtgui_time_sink_x_0_0_0.disable_legend()
         
-        labels = ["Original Signal 1", "Original Siginal 2", "", "", "",
+        labels = ["Original Signal 1", "Original Siginal 2", "Demodulated Signal 1", "Demodulated Signal 2", "",
                   "", "", "", "", ""]
         widths = [1, 1, 1, 1, 1,
                   1, 1, 1, 1, 1]
         colors = ["blue", "red", "green", "black", "cyan",
                   "magenta", "yellow", "dark red", "dark green", "blue"]
-        styles = [2, 1, 1, 1, 1,
+        styles = [1, 1, 2, 2, 1,
                   1, 1, 1, 1, 1]
         markers = [-1, -1, -1, -1, -1,
                    -1, -1, -1, -1, -1]
-        alphas = [1.0, 1.0, 1.0, 1.0, 1.0,
+        alphas = [1.0, 1.0, 0.8, 0.8, 1.0,
                   1.0, 1.0, 1.0, 1.0, 1.0]
         
-        for i in xrange(2):
+        for i in xrange(4):
             if len(labels[i]) == 0:
                 self.qtgui_time_sink_x_0_0_0.set_line_label(i, "Data {0}".format(i))
             else:
@@ -151,101 +151,14 @@ class loopback_qam(gr.top_block, Qt.QWidget):
             self.qtgui_time_sink_x_0_0_0.set_line_alpha(i, alphas[i])
         
         self._qtgui_time_sink_x_0_0_0_win = sip.wrapinstance(self.qtgui_time_sink_x_0_0_0.pyqwidget(), Qt.QWidget)
-        self.janela_layout_0.addWidget(self._qtgui_time_sink_x_0_0_0_win)
-        self.qtgui_time_sink_x_0_0 = qtgui.time_sink_f(
-        	1024, #size
-        	samp_rate, #samp_rate
-        	"Demodulated Signal 1 - Time", #name
-        	2 #number of inputs
-        )
-        self.qtgui_time_sink_x_0_0.set_update_time(0.10)
-        self.qtgui_time_sink_x_0_0.set_y_axis(-1, 4)
-        
-        self.qtgui_time_sink_x_0_0.set_y_label("Amplitude", "")
-        
-        self.qtgui_time_sink_x_0_0.enable_tags(-1, True)
-        self.qtgui_time_sink_x_0_0.set_trigger_mode(qtgui.TRIG_MODE_FREE, qtgui.TRIG_SLOPE_POS, 0.0, 0, 0, "")
-        self.qtgui_time_sink_x_0_0.enable_autoscale(True)
-        self.qtgui_time_sink_x_0_0.enable_grid(False)
-        self.qtgui_time_sink_x_0_0.enable_control_panel(False)
-        
-        if not True:
-          self.qtgui_time_sink_x_0_0.disable_legend()
-        
-        labels = ["Signal 1", "Siginal 2", "", "", "",
-                  "", "", "", "", ""]
-        widths = [1, 1, 1, 1, 1,
-                  1, 1, 1, 1, 1]
-        colors = ["blue", "red", "green", "black", "cyan",
-                  "magenta", "yellow", "dark red", "dark green", "blue"]
-        styles = [2, 1, 1, 1, 1,
-                  1, 1, 1, 1, 1]
-        markers = [-1, -1, -1, -1, -1,
-                   -1, -1, -1, -1, -1]
-        alphas = [1.0, 1.0, 1.0, 1.0, 1.0,
-                  1.0, 1.0, 1.0, 1.0, 1.0]
-        
-        for i in xrange(2):
-            if len(labels[i]) == 0:
-                self.qtgui_time_sink_x_0_0.set_line_label(i, "Data {0}".format(i))
-            else:
-                self.qtgui_time_sink_x_0_0.set_line_label(i, labels[i])
-            self.qtgui_time_sink_x_0_0.set_line_width(i, widths[i])
-            self.qtgui_time_sink_x_0_0.set_line_color(i, colors[i])
-            self.qtgui_time_sink_x_0_0.set_line_style(i, styles[i])
-            self.qtgui_time_sink_x_0_0.set_line_marker(i, markers[i])
-            self.qtgui_time_sink_x_0_0.set_line_alpha(i, alphas[i])
-        
-        self._qtgui_time_sink_x_0_0_win = sip.wrapinstance(self.qtgui_time_sink_x_0_0.pyqwidget(), Qt.QWidget)
-        self.janela_layout_1.addWidget(self._qtgui_time_sink_x_0_0_win)
-        self.qtgui_freq_sink_x_0_1_0 = qtgui.freq_sink_f(
-        	1024, #size
-        	firdes.WIN_BLACKMAN_hARRIS, #wintype
-        	0, #fc
-        	samp_rate, #bw
-        	"Demodulated signal 2 - Frequency", #name
-        	2 #number of inputs
-        )
-        self.qtgui_freq_sink_x_0_1_0.set_update_time(0.10)
-        self.qtgui_freq_sink_x_0_1_0.set_y_axis(-160, 0)
-        self.qtgui_freq_sink_x_0_1_0.set_trigger_mode(qtgui.TRIG_MODE_FREE, 0.0, 0, "")
-        self.qtgui_freq_sink_x_0_1_0.enable_autoscale(False)
-        self.qtgui_freq_sink_x_0_1_0.enable_grid(False)
-        self.qtgui_freq_sink_x_0_1_0.set_fft_average(0.05)
-        self.qtgui_freq_sink_x_0_1_0.enable_control_panel(False)
-        
-        if not True:
-          self.qtgui_freq_sink_x_0_1_0.disable_legend()
-        
-        if "float" == "float" or "float" == "msg_float":
-          self.qtgui_freq_sink_x_0_1_0.set_plot_pos_half(not True)
-        
-        labels = ["Signal 1", "Sginal 2", "", "", "",
-                  "", "", "", "", ""]
-        widths = [1, 1, 1, 1, 1,
-                  1, 1, 1, 1, 1]
-        colors = ["blue", "red", "green", "black", "cyan",
-                  "magenta", "yellow", "dark red", "dark green", "dark blue"]
-        alphas = [1.0, 1.0, 1.0, 1.0, 1.0,
-                  1.0, 1.0, 1.0, 1.0, 1.0]
-        for i in xrange(2):
-            if len(labels[i]) == 0:
-                self.qtgui_freq_sink_x_0_1_0.set_line_label(i, "Data {0}".format(i))
-            else:
-                self.qtgui_freq_sink_x_0_1_0.set_line_label(i, labels[i])
-            self.qtgui_freq_sink_x_0_1_0.set_line_width(i, widths[i])
-            self.qtgui_freq_sink_x_0_1_0.set_line_color(i, colors[i])
-            self.qtgui_freq_sink_x_0_1_0.set_line_alpha(i, alphas[i])
-        
-        self._qtgui_freq_sink_x_0_1_0_win = sip.wrapinstance(self.qtgui_freq_sink_x_0_1_0.pyqwidget(), Qt.QWidget)
-        self.janela_layout_1.addWidget(self._qtgui_freq_sink_x_0_1_0_win)
+        self.janela_layout_1.addWidget(self._qtgui_time_sink_x_0_0_0_win)
         self.qtgui_freq_sink_x_0_0 = qtgui.freq_sink_f(
         	1024, #size
-        	firdes.WIN_BLACKMAN_hARRIS, #wintype
+        	firdes.WIN_HAMMING, #wintype
         	0, #fc
         	samp_rate, #bw
         	"Original Signal - Frequency", #name
-        	2 #number of inputs
+        	4 #number of inputs
         )
         self.qtgui_freq_sink_x_0_0.set_update_time(0.10)
         self.qtgui_freq_sink_x_0_0.set_y_axis(-160, 0)
@@ -261,15 +174,15 @@ class loopback_qam(gr.top_block, Qt.QWidget):
         if "float" == "float" or "float" == "msg_float":
           self.qtgui_freq_sink_x_0_0.set_plot_pos_half(not True)
         
-        labels = ["Original Signal 1", "Original Signal 2", "", "", "",
+        labels = ["Original Signal 1", "Original Signal 2", "Demodulated Signal 1", "Demodulated Signal 2", "",
                   "", "", "", "", ""]
         widths = [1, 1, 1, 1, 1,
                   1, 1, 1, 1, 1]
         colors = ["blue", "red", "green", "black", "cyan",
                   "magenta", "yellow", "dark red", "dark green", "dark blue"]
-        alphas = [1.0, 1.0, 1.0, 1.0, 1.0,
+        alphas = [1.0, 1.0, 1.0, 0.8, 1.0,
                   1.0, 1.0, 1.0, 1.0, 1.0]
-        for i in xrange(2):
+        for i in xrange(4):
             if len(labels[i]) == 0:
                 self.qtgui_freq_sink_x_0_0.set_line_label(i, "Data {0}".format(i))
             else:
@@ -355,11 +268,11 @@ class loopback_qam(gr.top_block, Qt.QWidget):
         self.connect((self.analog_sig_source_x_1_0_0, 0), (self.blocks_multiply_xx_0_0_0_0, 0))    
         self.connect((self.analog_sig_source_x_1_1, 0), (self.blocks_multiply_xx_0_0_0, 0))    
         self.connect((self.blocks_add_const_vxx_0, 0), (self.audio_sink_0, 1))    
-        self.connect((self.blocks_add_const_vxx_0, 0), (self.qtgui_freq_sink_x_0_1_0, 1))    
-        self.connect((self.blocks_add_const_vxx_0, 0), (self.qtgui_time_sink_x_0_0, 1))    
+        self.connect((self.blocks_add_const_vxx_0, 0), (self.qtgui_freq_sink_x_0_0, 1))    
+        self.connect((self.blocks_add_const_vxx_0, 0), (self.qtgui_time_sink_x_0_0_0, 1))    
         self.connect((self.blocks_add_const_vxx_0_0, 0), (self.audio_sink_0, 0))    
-        self.connect((self.blocks_add_const_vxx_0_0, 0), (self.qtgui_freq_sink_x_0_1_0, 0))    
-        self.connect((self.blocks_add_const_vxx_0_0, 0), (self.qtgui_time_sink_x_0_0, 0))    
+        self.connect((self.blocks_add_const_vxx_0_0, 0), (self.qtgui_freq_sink_x_0_0, 0))    
+        self.connect((self.blocks_add_const_vxx_0_0, 0), (self.qtgui_time_sink_x_0_0_0, 0))    
         self.connect((self.blocks_add_xx_0, 0), (self.blocks_multiply_xx_0, 0))    
         self.connect((self.blocks_add_xx_0_0, 0), (self.blocks_multiply_xx_0_0, 0))    
         self.connect((self.blocks_add_xx_0_1, 0), (self.blocks_throttle_0, 0))    
@@ -370,11 +283,11 @@ class loopback_qam(gr.top_block, Qt.QWidget):
         self.connect((self.blocks_throttle_0, 0), (self.blocks_multiply_xx_0_0_0, 1))    
         self.connect((self.blocks_throttle_0, 0), (self.blocks_multiply_xx_0_0_0_0, 1))    
         self.connect((self.blocks_throttle_0, 0), (self.qtgui_freq_sink_x_0, 0))    
-        self.connect((self.blocks_wavfile_source_0, 0), (self.qtgui_freq_sink_x_0_0, 1))    
-        self.connect((self.blocks_wavfile_source_0, 0), (self.qtgui_time_sink_x_0_0_0, 1))    
+        self.connect((self.blocks_wavfile_source_0, 0), (self.qtgui_freq_sink_x_0_0, 3))    
+        self.connect((self.blocks_wavfile_source_0, 0), (self.qtgui_time_sink_x_0_0_0, 3))    
         self.connect((self.blocks_wavfile_source_0, 0), (self.rational_resampler_xxx_0, 0))    
-        self.connect((self.blocks_wavfile_source_0_0, 0), (self.qtgui_freq_sink_x_0_0, 0))    
-        self.connect((self.blocks_wavfile_source_0_0, 0), (self.qtgui_time_sink_x_0_0_0, 0))    
+        self.connect((self.blocks_wavfile_source_0_0, 0), (self.qtgui_freq_sink_x_0_0, 2))    
+        self.connect((self.blocks_wavfile_source_0_0, 0), (self.qtgui_time_sink_x_0_0_0, 2))    
         self.connect((self.blocks_wavfile_source_0_0, 0), (self.rational_resampler_xxx_0_0, 0))    
         self.connect((self.low_pass_filter_0, 0), (self.rational_resampler_xxx_1, 0))    
         self.connect((self.low_pass_filter_0_0, 0), (self.rational_resampler_xxx_1_0, 0))    
@@ -384,7 +297,7 @@ class loopback_qam(gr.top_block, Qt.QWidget):
         self.connect((self.rational_resampler_xxx_1_0, 0), (self.blocks_add_const_vxx_0_0, 0))    
 
     def closeEvent(self, event):
-        self.settings = Qt.QSettings("GNU Radio", "loopback_qam")
+        self.settings = Qt.QSettings("GNU Radio", "loopback_qam_sound_signals")
         self.settings.setValue("geometry", self.saveGeometry())
         event.accept()
 
@@ -405,12 +318,10 @@ class loopback_qam(gr.top_block, Qt.QWidget):
         self.low_pass_filter_0_0.set_taps(firdes.low_pass(1, self.samp_rate, 45.1e3, 100, firdes.WIN_HANN, 6.76))
         self.qtgui_freq_sink_x_0.set_frequency_range(0, self.samp_rate)
         self.qtgui_freq_sink_x_0_0.set_frequency_range(0, self.samp_rate)
-        self.qtgui_freq_sink_x_0_1_0.set_frequency_range(0, self.samp_rate)
-        self.qtgui_time_sink_x_0_0.set_samp_rate(self.samp_rate)
         self.qtgui_time_sink_x_0_0_0.set_samp_rate(self.samp_rate)
 
 
-def main(top_block_cls=loopback_qam, options=None):
+def main(top_block_cls=loopback_qam_sound_signals, options=None):
 
     from distutils.version import StrictVersion
     if StrictVersion(Qt.qVersion()) >= StrictVersion("4.5.0"):
