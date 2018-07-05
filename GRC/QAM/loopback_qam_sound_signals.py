@@ -4,7 +4,7 @@
 # GNU Radio Python Flow Graph
 # Title: Loopback QAM Modulation - Sound Signals
 # Author: Hugo Soares
-# Generated: Tue Jul  3 15:56:07 2018
+# Generated: Thu Jul  5 14:40:34 2018
 ##################################################
 
 if __name__ == '__main__':
@@ -161,7 +161,7 @@ class loopback_qam_sound_signals(gr.top_block, Qt.QWidget):
         	4 #number of inputs
         )
         self.qtgui_freq_sink_x_0_0.set_update_time(0.10)
-        self.qtgui_freq_sink_x_0_0.set_y_axis(-160, 0)
+        self.qtgui_freq_sink_x_0_0.set_y_axis(-140, 0)
         self.qtgui_freq_sink_x_0_0.set_trigger_mode(qtgui.TRIG_MODE_FREE, 0.0, 0, "")
         self.qtgui_freq_sink_x_0_0.enable_autoscale(False)
         self.qtgui_freq_sink_x_0_0.enable_grid(False)
@@ -246,35 +246,19 @@ class loopback_qam_sound_signals(gr.top_block, Qt.QWidget):
         self.blocks_multiply_xx_0_0 = blocks.multiply_vff(1)
         self.blocks_multiply_xx_0 = blocks.multiply_vff(1)
         self.blocks_add_xx_0_1 = blocks.add_vff(1)
-        self.blocks_add_xx_0_0 = blocks.add_vff(1)
-        self.blocks_add_xx_0 = blocks.add_vff(1)
-        self.blocks_add_const_vxx_0_0 = blocks.add_const_vff((-2, ))
-        self.blocks_add_const_vxx_0 = blocks.add_const_vff((-2, ))
         self.audio_sink_0 = audio.sink(44100, "", True)
         self.analog_sig_source_x_1_1 = analog.sig_source_f(samp_rate, analog.GR_COS_WAVE, 80000, 1, 0)
         self.analog_sig_source_x_1_0_0 = analog.sig_source_f(samp_rate, analog.GR_SIN_WAVE, 80000, 1, 0)
         self.analog_sig_source_x_1_0 = analog.sig_source_f(samp_rate, analog.GR_SIN_WAVE, 80000, 2, 0)
         self.analog_sig_source_x_1 = analog.sig_source_f(samp_rate, analog.GR_COS_WAVE, 80000, 2, 0)
-        self.analog_sig_source_x_0_0 = analog.sig_source_f(samp_rate, analog.GR_COS_WAVE, 0, 2, 0)
-        self.analog_sig_source_x_0 = analog.sig_source_f(samp_rate, analog.GR_COS_WAVE, 0, 2, 0)
 
         ##################################################
         # Connections
         ##################################################
-        self.connect((self.analog_sig_source_x_0, 0), (self.blocks_add_xx_0, 1))    
-        self.connect((self.analog_sig_source_x_0_0, 0), (self.blocks_add_xx_0_0, 1))    
         self.connect((self.analog_sig_source_x_1, 0), (self.blocks_multiply_xx_0, 1))    
         self.connect((self.analog_sig_source_x_1_0, 0), (self.blocks_multiply_xx_0_0, 1))    
         self.connect((self.analog_sig_source_x_1_0_0, 0), (self.blocks_multiply_xx_0_0_0_0, 0))    
         self.connect((self.analog_sig_source_x_1_1, 0), (self.blocks_multiply_xx_0_0_0, 0))    
-        self.connect((self.blocks_add_const_vxx_0, 0), (self.audio_sink_0, 1))    
-        self.connect((self.blocks_add_const_vxx_0, 0), (self.qtgui_freq_sink_x_0_0, 1))    
-        self.connect((self.blocks_add_const_vxx_0, 0), (self.qtgui_time_sink_x_0_0_0, 1))    
-        self.connect((self.blocks_add_const_vxx_0_0, 0), (self.audio_sink_0, 0))    
-        self.connect((self.blocks_add_const_vxx_0_0, 0), (self.qtgui_freq_sink_x_0_0, 0))    
-        self.connect((self.blocks_add_const_vxx_0_0, 0), (self.qtgui_time_sink_x_0_0_0, 0))    
-        self.connect((self.blocks_add_xx_0, 0), (self.blocks_multiply_xx_0, 0))    
-        self.connect((self.blocks_add_xx_0_0, 0), (self.blocks_multiply_xx_0_0, 0))    
         self.connect((self.blocks_add_xx_0_1, 0), (self.blocks_throttle_0, 0))    
         self.connect((self.blocks_multiply_xx_0, 0), (self.blocks_add_xx_0_1, 0))    
         self.connect((self.blocks_multiply_xx_0_0, 0), (self.blocks_add_xx_0_1, 1))    
@@ -291,10 +275,14 @@ class loopback_qam_sound_signals(gr.top_block, Qt.QWidget):
         self.connect((self.blocks_wavfile_source_0_0, 0), (self.rational_resampler_xxx_0_0, 0))    
         self.connect((self.low_pass_filter_0, 0), (self.rational_resampler_xxx_1, 0))    
         self.connect((self.low_pass_filter_0_0, 0), (self.rational_resampler_xxx_1_0, 0))    
-        self.connect((self.rational_resampler_xxx_0, 0), (self.blocks_add_xx_0, 0))    
-        self.connect((self.rational_resampler_xxx_0_0, 0), (self.blocks_add_xx_0_0, 0))    
-        self.connect((self.rational_resampler_xxx_1, 0), (self.blocks_add_const_vxx_0, 0))    
-        self.connect((self.rational_resampler_xxx_1_0, 0), (self.blocks_add_const_vxx_0_0, 0))    
+        self.connect((self.rational_resampler_xxx_0, 0), (self.blocks_multiply_xx_0, 0))    
+        self.connect((self.rational_resampler_xxx_0_0, 0), (self.blocks_multiply_xx_0_0, 0))    
+        self.connect((self.rational_resampler_xxx_1, 0), (self.audio_sink_0, 1))    
+        self.connect((self.rational_resampler_xxx_1, 0), (self.qtgui_freq_sink_x_0_0, 1))    
+        self.connect((self.rational_resampler_xxx_1, 0), (self.qtgui_time_sink_x_0_0_0, 1))    
+        self.connect((self.rational_resampler_xxx_1_0, 0), (self.audio_sink_0, 0))    
+        self.connect((self.rational_resampler_xxx_1_0, 0), (self.qtgui_freq_sink_x_0_0, 0))    
+        self.connect((self.rational_resampler_xxx_1_0, 0), (self.qtgui_time_sink_x_0_0_0, 0))    
 
     def closeEvent(self, event):
         self.settings = Qt.QSettings("GNU Radio", "loopback_qam_sound_signals")
@@ -307,8 +295,6 @@ class loopback_qam_sound_signals(gr.top_block, Qt.QWidget):
 
     def set_samp_rate(self, samp_rate):
         self.samp_rate = samp_rate
-        self.analog_sig_source_x_0.set_sampling_freq(self.samp_rate)
-        self.analog_sig_source_x_0_0.set_sampling_freq(self.samp_rate)
         self.analog_sig_source_x_1.set_sampling_freq(self.samp_rate)
         self.analog_sig_source_x_1_0.set_sampling_freq(self.samp_rate)
         self.analog_sig_source_x_1_0_0.set_sampling_freq(self.samp_rate)
